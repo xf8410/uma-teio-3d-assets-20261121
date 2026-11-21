@@ -1,0 +1,11 @@
+{
+  "parts": 96,
+  "triangles": 1632724,
+  "hand_skin_watertight": true,
+  "glove_watertight": true,
+  "position_welded_open_boundary_edges": 0,
+  "hand_hair_min_vertex_clearance": 0.002269682307900356,
+  "clearance_note": "Vertex-distance screening only; assembled three-view and hand close-up renders were also inspected.",
+  "base_removed": true,
+  "uv_preserved": true
+}
