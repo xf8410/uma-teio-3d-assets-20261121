@@ -28,8 +28,9 @@ jobs:
       - name: Install Blender (system package)
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends blender
-          blender --version | head -2
+          sudo apt-get install -y --no-install-recommends blender python3-pil
+          blender --version | head -3
+          apt-cache policy blender | head -6
 
       - name: Install Python deps
         run: python -m pip install --quiet pillow
