@@ -1,0 +1,66 @@
+name: three-view
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "GLB path inside the repo"
+        required: true
+        default: "东海帝皇_超越地平线_菊红礼服_官方立绘重建_全身可动.glb"
+      yaw:
+        description: "Front view yaw in degrees"
+        required: false
+        default: "40"
+      samples:
+        description: "Cycles samples"
+        required: false
+        default: "24"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Blender (system package)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends blender
+          blender --version | head -2
+
+      - name: Install Python deps
+        run: python -m pip install --quiet pillow
+
+      - name: Render views
+        run: |
+          blender -b -noaudio --factory-startup --python tools/render_threeview.py -- \
+            "${{ inputs.model }}" "${{ inputs.yaw }}" out 800 1160 "${{ inputs.samples }}"
+
+      - name: Compose sheet
+        run: |
+          python tools/compose_sheet.py out sheet.png FRONT SIDE BACK
+          ls -l out sheet.png
+
+      - name: Commit results
+        run: |
+          set -e
+          git config user.name "teio-render-bot"
+          git config user.email "teio-render-bot@users.noreply.github.com"
+          mkdir -p renders
+          STAMP=$(date -u +%Y%m%d-%H%M)
+          cp sheet.png "renders/三视图_${STAMP}.png"
+          cp out/meta.json "renders/三视图_${STAMP}.json"
+          git add renders
+          git commit -m "Render three-view from ${{ inputs.model }} (yaw ${{ inputs.yaw }})"
+          git push
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: three-view
+          path: |
+            sheet.png
+            out/*.png
+            out/meta.json
