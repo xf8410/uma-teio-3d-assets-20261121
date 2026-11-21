@@ -1,0 +1,11 @@
+{
+  "hand_part": "part_15",
+  "hair_part": "part_4",
+  "separate_meshes": true,
+  "minimum_vertex_clearance": 0.00641477593240621,
+  "median_vertex_clearance": 0.04253645728096314,
+  "hand_vertices_within_0.001": 0,
+  "base_node_removed": true,
+  "hand_faces": 15635,
+  "hair_faces": 101495
+}

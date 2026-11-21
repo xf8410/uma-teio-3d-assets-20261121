@@ -1,0 +1,38 @@
+{
+  "vertices_after_position_weld": 734602,
+  "triangles": 1402642,
+  "boundary_edges": 65836,
+  "nonmanifold_edges": 65836,
+  "edges_shared_by_more_than_two_faces": 0,
+  "zero_area_triangles": 0,
+  "degenerate_triangles_epsilon_1e-10": 0,
+  "watertight": false,
+  "winding_consistent": true,
+  "bounds": [
+    [
+      -0.16543146967887878,
+      -0.5,
+      -0.3691009283065796
+    ],
+    [
+      0.16543146967887878,
+      0.5,
+      0.3691009283065796
+    ]
+  ],
+  "review_scope": "第一版 GLB；正交正面、右侧、背面渲染及网格拓扑检查",
+  "visual_review": {
+    "large_visible_through_holes": "三视图未发现明确的大块贯穿破洞",
+    "back_waist": "腰后存在明显白色矩形纹理或材质异常，需要修正",
+    "tail_root": "尾巴根部较平板，需对照官方背面参考修整",
+    "thin_parts": "披风、裙摆、发梢和靴口绒毛等含薄片或开放边结构"
+  },
+  "interpretation": "boundary_edges 包含有意开放的薄片边界，不能全部等同于破面；当前模型并非 watertight，且存在背面可见异常，因此第一版不通过定稿检查。",
+  "recommended_next_pass": [
+    "修正腰后白色矩形异常",
+    "对照官方背面照片修整尾巴根部",
+    "局部放大检查腋下、腰间、裙摆、披风破洞与靴口绒毛",
+    "修正后重新输出正侧背三视图并复测网格指标"
+  ],
+  "reference": "ALTER 官方手办正侧背照片；非正交设定图"
+}
