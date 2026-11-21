@@ -32,8 +32,8 @@ jobs:
           blender --version | head -3
           apt-cache policy blender | head -6
 
-      - name: Install Python deps
-        run: python -m pip install --quiet pillow
+      - name: Verify Pillow
+        run: python3 -c "import PIL; print('pillow', PIL.__version__)"
 
       - name: Render views
         run: |
